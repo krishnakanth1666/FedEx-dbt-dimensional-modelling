@@ -1,0 +1,15 @@
+AmazonSales:
+  target: postgres
+
+  # database: postgres 
+  outputs:
+    
+    postgres:  
+      type: postgres
+      host: localhost
+      user: postgres
+      password: Krishna@890
+      port: 5433
+      dbname: amazon_sales
+      schema: sales_dbo
+      threads: 12

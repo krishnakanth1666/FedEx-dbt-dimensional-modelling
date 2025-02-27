@@ -1,0 +1,120 @@
+version: 2
+
+models:
+  - name: fact_sales
+    description: "Dimension table containing fulfillment details."
+    columns:
+      - name: sales_id
+        description: "The surrogate key of the fct sales"
+        tests:
+          - not_null
+      - name: order_date
+        description: "Order Date of the Product"
+        tests:
+          - not_null
+      - name: date_id
+        description: "Foreign Key referencing the Date table"
+        tests:
+          - relationships:
+              to: ref('dim_date')
+              field: date_key
+      - name: product_id
+        description: "Foreign Key referencing the Product table"
+        tests:
+          - relationships:
+              to: ref('dim_product')
+              field: product_id
+      - name: store_key
+        description: "Foreign Key referencing the Srore table"
+        tests:
+          - relationships:
+              to: ref('dim_store')
+              field: store_id
+      - name: promotion_id
+        description: "Foreign Key referencing the Promotion table"
+        tests:
+          - relationships:
+              to: ref('dim_promotion')
+              field: promotion_id
+      - name: fulfillment_id
+        description: "Fulfillment"
+      - name: qty
+        description: "Quantity of items sold."
+      - name: amount
+        description: "Total sales amount."
+      - name: currency
+        description: "Currency type."
+      - name: sales_channel
+        description: "Sales channel (e.g., Online, B2B)."
+
+  - name: dim_product
+    description: "Dimension table containing product details."
+    columns:
+      - name: product_id
+        description: "Primary key for the product."
+        tests:
+          - unique
+          - not_null
+      - name: sku
+        description: "Stock Keeping Unit."
+      - name: category
+        description: "Product category."
+      - name: style
+        description: "Product style."
+      - name: size
+        description: "Product size."
+
+  - name: dim_date
+    description: "Dimension table containing date details."
+    columns:
+      - name: date_key
+        description: "Primary key for the date."
+        tests:
+          - dbt_constraints.primary_key
+          - unique
+          - not_null
+      - name: order_date
+        description: "Actual date."
+      - name: order_month
+        description: "Month in Numbers."
+      - name: order_month
+        description: "Month in Numbers."
+      - name: order_year
+        description: "Year of the order"
+      - name: order_quarter
+        description: "order quarter"
+
+  - name: dim_store
+    description: "Dimension table containing fulfillment and store details."
+    columns:
+      - name: store_id
+        description: "Primary key for the store."
+        tests:
+          - unique
+          - not_null
+      - name: fulfilled_by
+        description: "Fulfillment method."
+      - name: courier_status
+        description: "Courier status."
+
+  - name: dim_promotion
+    description: "Dimension table containing promotions."
+    columns:
+      - name: promotion_id
+        description: "Primary key for the promotion."
+        tests:
+          - not_null
+
+  - name: dim_fulfillment
+    description: "Dimension table containing fulfillment details."
+    columns:
+      - name: fulfillment_id
+        description: "Primary key for fulfillment."
+        tests:
+          - not_null
+      - name: ship_service_level
+        description: "Shipping service level."
+      - name: status
+        description: "Fulfillment status."
+  
+  

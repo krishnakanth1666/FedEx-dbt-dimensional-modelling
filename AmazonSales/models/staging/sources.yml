@@ -1,0 +1,44 @@
+version: 2
+
+sources:
+  - name: sales_dbo
+    database: amazon_sales  
+    schema: sales_dbo
+    tables:
+      - name: Amazon Sale Report
+        description: "Raw Amazon sales data loaded from the CSV."
+        columns:
+          - name: order_id
+            description: "Unique identifier for the order."
+            tests:
+              - not_null
+          - name: order_date
+            description: "Date when the order was placed."
+            tests:
+              - not_null
+          - name: SKU
+            description: "Stock keeping unit identifier."
+          - name: ship-city
+            description: "City where the order was shipped."
+          - name: ship-state
+            description: "State where the order was shipped."
+          - name: ship-postal-code
+            description: "Postal code for shipping address."
+          - name: ship-country
+            description: "Country where the order was shipped."
+          - name: fulfilled-by
+            description: "Indicates whether fulfilled by Amazon or seller."
+          - name: ship-service-level
+            description: "Shipping service level used."
+          - name: Status
+            description: "Current status of the order."
+          - name: promotion-ids
+            description: "IDs of promotions applied to the order."
+          - name: Qty
+            description: "Quantity of items purchased."
+          - name: Amount
+            description: "Total amount for the order."
+          - name: Currency
+            description: "Currency used in the transaction."
+          - name: sales_channel
+            description: "Sales channel through which the order was placed."
